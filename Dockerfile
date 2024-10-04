@@ -13,7 +13,7 @@ FROM --platform=linux/arm64 mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["src/AnonShare.csproj", "src/"]
-RUN dotnet restore "./src/AnonShare.csproj"
+RUN dotnet restore --runtime linux-arm64 "./src/AnonShare.csproj"
 COPY . .
 WORKDIR "/src/src"
 RUN dotnet build --runtime linux-arm64 "./AnonShare.csproj" -c $BUILD_CONFIGURATION -o /app/build
@@ -21,7 +21,7 @@ RUN dotnet build --runtime linux-arm64 "./AnonShare.csproj" -c $BUILD_CONFIGURAT
 # This stage is used to publish the service project to be copied to the final stage
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish --runtime linux-arm64 "./AnonShare.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish --runtime linux-arm64 --self-contained "./AnonShare.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 # This stage is used in production or when running from VS in regular mode (Default when not using the Debug configuration)
 FROM base AS final
