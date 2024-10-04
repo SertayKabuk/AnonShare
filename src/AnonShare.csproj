@@ -8,6 +8,7 @@
 		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
 		<RuntimeIdentifiers>linux-arm64</RuntimeIdentifiers>
 		<EnableSdkContainerDebugging>True</EnableSdkContainerDebugging>
+		<PlatformTarget>ARM64</PlatformTarget>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -16,11 +17,4 @@
 		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
 		<PackageReference Include="QRCoder" Version="1.6.0" />
 	</ItemGroup>
-
-	<ItemGroup>
-	  <ContainerEnvironmentVariable Include="ASPNETCORE_HTTPS_PORTS">
-	    <Value>8081</Value>
-	  </ContainerEnvironmentVariable>
-	</ItemGroup>
-
 </Project>
