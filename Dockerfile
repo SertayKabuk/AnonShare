@@ -27,4 +27,4 @@ RUN dotnet publish --arch arm64 "./AnonShare.csproj" -c $BUILD_CONFIGURATION -o 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "AnonShare.dll"]
+ENTRYPOINT ["dotnet", "AnonShare.dll", "--arch", "arm64"]
