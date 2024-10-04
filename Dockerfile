@@ -13,7 +13,7 @@ FROM --platform=linux/arm64 mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["src/AnonShare.csproj", "src/"]
-RUN dotnet restore "./src/AnonShare.csproj"
+RUN dotnet restore --runtime linux-arm64 "./src/AnonShare.csproj"
 COPY . .
 WORKDIR "/src/src"
 RUN dotnet build --runtime linux-arm64 "./AnonShare.csproj" -c $BUILD_CONFIGURATION -o /app/build
